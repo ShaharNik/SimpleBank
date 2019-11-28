@@ -3,27 +3,27 @@
 #include <stdbool.h>
 #include <math.h>
 
-	double bank_accounts[2][50];
-	double round2(double amount)
-	{
-		double nearest = (int)(amount * 100);
-		return nearest / 100;
-	}
+double bank_accounts[2][50]={0};
+
+double round2(double amount)
+{
+	double nearest = (int)(amount * 100);
+	return nearest / 100;
+}
 void Create_new_account(double amount)
 {
 	bool account_created = false;
 	int acc_num;
 	for(int i=1; i <= 50; i++)
-    {
-        if (bank_accounts[0][i] == 0) // if closed bank founded
-        {
-            bank_accounts[0][i] = i + 900; // Open the bank
+	{
+		if (bank_accounts[0][i] == 0) // if closed bank founded
+		{
+			bank_accounts[0][i] = i + 900; // Open the bank
 			bank_accounts[1][i] = amount; //Init amount
 			acc_num = i + 900;
 			account_created = true;
 			break;
-        }
-    
+		}
 	}
 	if (!account_created)
 		printf("There is No empty bank avialble..\n");
@@ -152,6 +152,7 @@ void Delete_all_and_close()
 		bank_accounts[1][i] = 0; //Init amount to zero
 
 	}
+	printf("all accounts are closed!");
 }
 
 void display_options()

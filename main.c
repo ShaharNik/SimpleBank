@@ -5,32 +5,42 @@ double getAmount()
 {
 	double amount;
 	printf("Amount?\n");
-	while (scanf("%lf", &amount) != 1)
+	if (scanf("%lf", &amount) == 1 && amount >= 0)
 	{
-		while (getchar() != '\n'){}
-		printf("Enter numeric amount please:");
+		//while (getchar() != '\n'){}
+		return amount;
 	}
-	return amount;
+	else 
+	{
+		printf("Enter positive numeric amount please\n");
+		return -1;
+	}
 }
 double getAccountNumber()
 {
 	int account_number;
 	printf("Account number?\n");
-	while(scanf("%d", &account_number) != 1)
+	if (scanf("%d", &account_number) == 1 && account_number >= 901 && account_number <= 950)
 	{
-		while (getchar() != '\n'){}
-		printf("Account number?\n");
+		//while (getchar() != '\n'){}
+		return account_number;
+		
+	}	
+	else
+	{
+		printf("Bad Account number!\n");
+		return -1;
 	}
-	return account_number;
+		
 }
 double getInterestRate()
 {
 	double interest_rate;
 	printf("Interest rate?\n");
-	while (scanf("%lf", &interest_rate) != 1)
+	if (scanf("%lf", &interest_rate) != 1)
 	{
-		while (getchar() != '\n'){}
-		printf("Interest rate?\n");
+		//while (getchar() != '\n'){}
+		printf("Bad Interest rate!\n");
 	}
 	return interest_rate;
 }
@@ -40,7 +50,7 @@ int main()
 	display_options();
 	int close = 1;
 
-	while (close != 0)
+	while (close != 0) // != E
 	{
 		char option;
 		int account_number;
@@ -50,7 +60,7 @@ int main()
 		printf("Transaction type?\n");
 		while (scanf(" %c", &option) != 1)
 		{
-			while (getchar() != '\n'){}
+			//while (getchar() != '\n'){}
 			printf("Enter Option Please: (O/B/D/W/C/I/P/E)");
 		}
 
@@ -58,25 +68,30 @@ int main()
 		{
 			case 'O': // Make new account
 				amount = getAmount();
-				Create_new_account(round2(amount));
+				if (amount != -1)
+					Create_new_account(round2(amount));
 				break;
 			case 'B': // check itra
 				account_number = getAccountNumber();
-				Account_information(account_number);
+				if (account_number != -1)
+					Account_information(account_number);
 				break;
 			case 'D': // hafked kesef
 				account_number = getAccountNumber();
 				amount = getAmount();
-				Cash_Deposit(account_number, round2(amount));
+				if (account_number != -1 && amount != -1)
+					Cash_Deposit(account_number, round2(amount));
 				break;
 			case 'W': // take money
 				account_number = getAccountNumber();
 				amount = getAmount();
-				Cash_Withdrawl(account_number, round2(amount));
+				if (account_number != -1 && amount != -1)
+					Cash_Withdrawl(account_number, round2(amount));
 				break;
 			case 'C': // close account
 				account_number = getAccountNumber();
-				Close_Account(account_number);
+				if (account_number != -1)
+					Close_Account(account_number);
 				break;
 			case 'I': 
 				interest_rate = getInterestRate();
@@ -89,8 +104,8 @@ int main()
 				close = 0; // end while
 				break;
 			default: 
-				while(getchar() != '\n'){}
-				printf("Please enter one of the options");
+				//while(getchar() != '\n'){}
+				printf("Please enter one of the options ");
 				printf("(O/B/D/W/C/I/P/E) to continue \n ");
 				break;
 		}
